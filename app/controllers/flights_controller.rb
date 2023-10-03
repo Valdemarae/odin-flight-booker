@@ -1,10 +1,9 @@
 class FlightsController < ApplicationController
   def index
+    @all_flights = Flight.all
     if params.include?(:flight)
       flight_params_shortcuts
       @flights = Flight.where("flights.arrival_airport_id = ? AND flights.departure_airport_id = ? AND start LIKE ?", @arrival_airport_id, @departure_airport_id, "#{@start}%")
-    else
-      @flights = Flight.all
     end
   end
 
