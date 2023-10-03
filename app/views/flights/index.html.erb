@@ -34,6 +34,7 @@
     <ol>
       <% @flights.each do |flight| %>
         <li>
+          <% hidden_field :number_of_passangers, choice[2] %>
           <p><%= radio_button_tag 'flight_id', flight.id %>Date and time: <%= flight.start %></p>
           <p>Departure airport: <%= flight.departure_airport.code %></p>
           <p>Arrival airport: <%= flight.arrival_airport.code %></p>
