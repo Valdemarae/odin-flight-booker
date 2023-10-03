@@ -30,18 +30,17 @@
 <%= link_to 'Back', flights_path %>
 
 <% if @flights %>
-  <ol>
-    <% @flights.each do |flight| %>
-      <li>
-        <ul>
-          <li>
-            <p>Date and time: <%= flight.start %></p>
-            <p>Departure airport: <%= flight.departure_airport.code %></p>
-            <p>Arrival airport: <%= flight.arrival_airport.code %></p>
-            <p>Flight duration: <%= flight.flight_duration %> hours</p>
-          </li>
-        </ul>
-      </li>
-    <% end %>
-</ol>
+  <%= form_tag('/', method: :get) do %>
+    <ol>
+      <% @flights.each do |flight| %>
+        <li>
+          <p><%= radio_button_tag 'flight_id', flight.id %>Date and time: <%= flight.start %></p>
+          <p>Departure airport: <%= flight.departure_airport.code %></p>
+          <p>Arrival airport: <%= flight.arrival_airport.code %></p>
+          <p>Flight duration: <%= flight.flight_duration %> hours</p>
+        </li>
+      <% end %>
+    </ol>
+    <%= submit_tag 'Choose' %>
+  <% end %>
 <% end %>
