@@ -30,12 +30,12 @@
 <%= link_to 'Back', flights_path %>
 
 <% if @flights %>
-  <%= form_tag('/', method: :get) do %>
+  <%= form_tag(new_booking_path, method: :get) do %>
     <ol>
       <% @flights.each do |flight| %>
         <li>
-          <% hidden_field :number_of_passangers, choice[2] %>
-          <p><%= radio_button_tag 'flight_id', flight.id %>Date and time: <%= flight.start %></p>
+          <%= hidden_field_tag :number_of_passangers, choice[2] %>
+          <p><%= radio_button_tag :flight_id, flight.id %>Date and time: <%= flight.start %></p>
           <p>Departure airport: <%= flight.departure_airport.code %></p>
           <p>Arrival airport: <%= flight.arrival_airport.code %></p>
           <p>Flight duration: <%= flight.flight_duration %> hours</p>

@@ -1,0 +1,41 @@
+<%= form_with model: @booking do |f| %>
+    <ul>
+      <li>Flight ID <%= @flight.id %></li>
+      <li>
+        <%= f.label 'flight_departure_airport_id', 'Departure Airport' %>
+        <%= f.select(:departure_airport_id, [[@flight.departure_airport.code,
+        @flight.departure_airport_id]], {}, :disabled => true) %>
+      </li>
+      <li>
+        <%= f.label 'flight_arrival_airport_id', 'Arrival Airport' %>
+        <%= f.select(:arrival_airport_id, [[@flight.arrival_airport.code,
+        @flight.arrival_airport_id]], {}, :disabled => true) %>
+      </li>
+      <li>
+        <%= f.label 'flight_number_of_passangers', 'Number Of Passangers' %>
+        <%= f.select(:number_of_passangers, [@number_of_passangers], {}, :disabled => true) %>
+      </li>
+      <li>
+        <%= f.label 'flight_start', 'Flight Date' %>
+        <%= f.select(:start, [@flight.start.strftime("%Y-%m-%d")], {}, :disabled => true) %>
+      </li>
+
+      <% @passangers.each_with_index do |passanger, i| %>
+        <h3>Passanger <%= i + 1 %></h3>
+        <%= fields_for :passangers, passanger do |p| %>
+          <ul>
+            <li>
+              <%= p.label :name %>
+              <%= p.text_field :name %>
+            </li>
+            <li>
+              <%= p.label :email %>
+              <%= p.email_field :email %>
+            </li>
+          </ul>
+        <% end %>
+      <% end %>
+
+      <%= submit_tag 'Create Booking' %>
+    </ul>
+  <% end %>
