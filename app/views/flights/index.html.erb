@@ -1,26 +1,41 @@
 <% unless params.include?(:flight) %>
-<ol>
-  <%= form_tag(flights_path, method: :get) do %>
-    <li>
-      <%= label_tag 'flight_departure_airport_id', 'Departure Airport' %>
-      <%= select(:flight, :departure_airport_id, @flights.map{ |f| [ f.departure_airport.code, 
-      f.departure_airport_id ] }) %>
-    </li>
-    <li>
-      <%= label_tag 'flight_arrival_airport_id', 'Arrival Airport' %>
-      <%= select(:flight, :arrival_airport_id, @flights.map{ |f| [ f.arrival_airport.code, 
-      f.arrival_airport_id ] }) %>
-    </li>
-    <li>
-      <%= label_tag 'flight_number_of_passangers', 'Number Of Passangers' %>
-      <%= select(:flight, :number_of_passangers, 1..4) %>
-    </li>
-    <li>
-      <%= label_tag 'flight_start', 'Flight Date' %>
-      <%= select(:flight, :start, @flights.uniq { |s| s.start.strftime("%d %m %Y") }.map{ |f| [ f.start.strftime("%d %m %Y"), 
-      f.start ] }) %>
-    </li>
-    <%= submit_tag 'Search' %>
-  <% end %>
-</ol>
+  <ol>
+    <%= form_tag(flights_path, method: :get) do %>
+      <li>
+        <%= label_tag 'flight_departure_airport_id', 'Departure Airport' %>
+        <%= select(:flight, :departure_airport_id, @flights.map{ |f| [ f.departure_airport.code, 
+        f.departure_airport_id ] }.uniq) %>
+      </li>
+      <li>
+        <%= label_tag 'flight_arrival_airport_id', 'Arrival Airport' %>
+        <%= select(:flight, :arrival_airport_id, @flights.map{ |f| [ f.arrival_airport.code, 
+        f.arrival_airport_id ] }.uniq) %>
+      </li>
+      <li>
+        <%= label_tag 'flight_number_of_passangers', 'Number Of Passangers' %>
+        <%= select(:flight, :number_of_passangers, 1..4) %>
+      </li>
+      <li>
+        <%= label_tag 'flight_start', 'Flight Date' %>
+        <%= select(:flight, :start, @flights.map{|a| a.start.strftime("%Y-%m-%d")}.uniq) %>
+      </li>
+      <%= submit_tag 'Search' %>
+    <% end %>
+  </ol>
+<% else %>
+  <%= link_to 'Back', flights_path %>
+  <ol>
+    <% @flights.each do |flight| %>
+      <li>
+        <ul>
+          <li>
+            <p>Date and time: <%= flight.start %></p>
+            <p>Departure airport: <%= flight.departure_airport.code %></p>
+            <p>Arrival airport: <%= flight.arrival_airport.code %></p>
+            <p>Flight duration: <%= flight.flight_duration %> hours</p>
+          </li>
+        </ul>
+      </li>
+    <% end %>
+  </ol>
 <% end %>
