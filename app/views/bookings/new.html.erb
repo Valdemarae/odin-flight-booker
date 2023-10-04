@@ -1,6 +1,6 @@
 <%= form_with model: @booking do |f| %>
     <ul>
-      <li>Flight ID <%= @flight.id %></li>
+      <li>Flight ID <%= @flight.id %>, Duration <%= @flight.flight_duration %> hours, Start <%= @flight.start %></li>
       <li>
         <%= f.label 'flight_departure_airport_id', 'Departure Airport' %>
         <%= f.select(:departure_airport_id, [[@flight.departure_airport.code,

@@ -1,0 +1,16 @@
+<h1>Booking information</h1>
+<ul>
+  <li>Flight ID <%= @booking.flight.id %></li>
+  <li>Duration <%= @booking.flight.flight_duration %> hours</li>
+  <li>Takeoff <%= @booking.flight.start %></li>
+  <li>Departure Airport <%= @booking.flight.departure_airport.code %></li>
+  <li>Arrival Airport <%= @booking.flight.arrival_airport.code %></li>  
+</ul>
+<h2>Passangers information</h2>
+<ul>
+  <% @booking.passangers.each_with_index do |passanger, i| %>
+    <h3>Passanger <%= i + 1%></h3>
+    <li>Name: <%= passanger.name %></li>
+    <li>Email: <%= passanger.email %></li>
+  <% end %>
+</ul>
