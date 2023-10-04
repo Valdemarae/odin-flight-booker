@@ -20,9 +20,9 @@
         <%= f.select(:start, [@flight.start.strftime("%Y-%m-%d")], {}, :disabled => true) %>
       </li>
 
-      <% @passangers.each_with_index do |passanger, i| %>
+      <% @booking.passangers.each_with_index do |passanger, i| %>
         <h3>Passanger <%= i + 1 %></h3>
-        <%= fields_for :passangers, passanger do |p| %>
+        <%= f.fields_for :passangers, passanger do |p| %>
           <ul>
             <li>
               <%= p.label :name %>
