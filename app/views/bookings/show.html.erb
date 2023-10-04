@@ -12,5 +12,6 @@
     <h3>Passanger <%= i + 1%></h3>
     <li>Name: <%= passanger.name %></li>
     <li>Email: <%= passanger.email %></li>
+    <li>Ticket code: <%= passanger.tickets.where(booking_id: @booking.id)[0].code %></li>
   <% end %>
 </ul>
