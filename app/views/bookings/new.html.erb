@@ -23,19 +23,22 @@
       <%= f.hidden_field :flight_id, value: @flight.id %>
 
       <% @booking.passangers.each_with_index do |passanger, i| %>
-        <h3>Passanger <%= i + 1 %></h3>
-        <%= f.fields_for :passangers, passanger do |p| %>
-          <ul>
-            <li>
-              <%= p.label :name %>
-              <%= p.text_field :name %>
-            </li>
-            <li>
-              <%= p.label :email %>
-              <%= p.email_field :email %>
-            </li>
-          </ul>
-        <% end %>
+        <div data-controller="passanger" data-passanger-target="div">
+          <h3>Passanger <%= i + 1 %></h3>
+          <%= f.fields_for :passangers, passanger do |p| %>
+            <ul>
+              <li>
+                <%= p.label :name %>
+                <%= p.text_field :name %>
+              </li>
+              <li>
+                <%= p.label :email %>
+                <%= p.email_field :email %>
+              </li>
+            </ul>
+            <button type="button" data-action="passanger#delete">Delete this field</button>
+          <% end %>
+        </div>
       <% end %>
 
       <div data-controller="passanger" data-passanger-target="div">
@@ -57,6 +60,7 @@
               </li>
             </ul>
           <% end %>
+          <button type="button" data-action="passanger#delete">Delete this field</button>
         </template>
       </div>
 

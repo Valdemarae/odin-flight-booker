@@ -6,4 +6,8 @@ export default class extends Controller {
   add() {
       this.divTarget.appendChild(this.templateTarget.content)
   }
+
+  delete() {
+    this.divTarget.parentNode.removeChild(this.divTarget)
+  }
 }
