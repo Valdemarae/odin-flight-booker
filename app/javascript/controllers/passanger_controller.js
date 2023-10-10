@@ -8,6 +8,8 @@ export default class extends Controller {
   }
 
   delete() {
-    this.divTarget.parentNode.removeChild(this.divTarget)
+    if (this.divTarget.parentNode.childElementCount != 1) {
+      this.divTarget.parentNode.removeChild(this.divTarget)
+    }
   }
 }
