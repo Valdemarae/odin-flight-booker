@@ -38,6 +38,29 @@
         <% end %>
       <% end %>
 
+      <div data-controller="passanger" data-passanger-target="div">
+        <button type="button" data-action="passanger#add">Extra passanger</button>
+
+        <template data-passanger-target="template">
+          <% @booking.passangers.build %>
+          <% @number_of_passangers += 1 %>
+          <h3>Passanger <%= @number_of_passangers %></h3>
+          <%= f.fields_for :passangers, @booking.passangers.last do |p| %>
+            <ul>
+              <li>
+                <%= p.label :name %>
+                <%= p.text_field :name %>
+              </li>
+              <li>
+                <%= p.label :email %>
+                <%= p.email_field :email %>
+              </li>
+            </ul>
+          <% end %>
+        </template>
+      </div>
+
       <%= submit_tag 'Create Booking' %>
     </ul>
   <% end %>
+
