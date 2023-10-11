@@ -9,7 +9,10 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params)
     if @booking.save
-      @booking.passangers.each {|p| p.tickets.create(booking_id: @booking.id, code: rand(10**5))}
+      @booking.passangers.each do |p| 
+        p.tickets.create(booking_id: @booking.id, code: rand(10**5))
+        PassangerMailer.with(user: p, url: booking_url(@booking.id)).booking_confirmation.deliver_now
+      end
       redirect_to booking_path(@booking.id)
     else
       @flight = Flight.find(params[:booking][:flight_id])

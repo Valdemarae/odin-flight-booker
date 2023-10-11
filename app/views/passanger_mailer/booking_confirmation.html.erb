@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Dear <%= @user.name %>,</h1>
+    <p>
+      You have successfully booked a flight.<br>
+    </p>
+    <p>
+      To see the details, just follow this <%=link_to 'link', @url%>.
+    </p>
+    <p>Thanks for cooperation and have a great day!</p>
+  </body>
+</html>
